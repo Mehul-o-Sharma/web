@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+
+<head>
+    <script src="./mojoauth.min.js"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+<div style="text-align:center; margin:auto">
+    <h2>MojoAuth Webauthn Demo </h2>
+    <div id="mojoauth-passwordless-form"></div>
+    
+    <script>
+        const rootContainer=document.getElementById("mojoauth-passwordless-form")
+        const postLoginId= 'post-login-message';
+        const loginFormId= 'mojoauth-login-container';
+
+        
+        const mojoauth = new MojoAuth("7c7858f6-6f79-4268-99fa-bbb7956061b0");
+        // Use signInWithEmailOTP() for authentication using Email OTP
+        mojoauth.signIn().then(payload=>{
+            const loginFormContainer = document.getElementById( loginFormId );
+            if ( loginFormContainer ) {
+                rootContainer.removeChild( loginFormContainer );
+            }
+            const postLoginContainer = document.getElementById( postLoginId );
+            if ( postLoginContainer ) {
+                rootContainer.removeChild( postLoginContainer );
+            }
+            const finish = document.createElement("h2")
+            finish.innerHTML="You have been logged in Successfully";
+            const data=document.createElement('pre')
+            data.style.margin="0 100px"
+            data.innerHTML=(JSON.stringify(payload));
+            const finalContainer=document.createElement("div")
+            finalContainer.appendChild(finish)
+            finalContainer.appendChild(data)
+            rootContainer.appendChild(finalContainer)
+            
+            
+        });
+
+    </script>
+    </div>
+    </body>
+</body>
+
+</html>
