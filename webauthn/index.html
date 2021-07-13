@@ -16,7 +16,7 @@
             const loginFormId = 'mojoauth-login-container';
 
 
-            const mojoauth = new MojoAuth( "2ea3cf28-a6f4-4fb5-87e8-ee4d209ce27e" );
+            const mojoauth = new MojoAuth( "410f7785-14f5-4a89-a0af-0e0f71d4c683" );
             // Use signInWithEmailOTP() for authentication using Email OTP
             mojoauth.signInWithMagicLink().then( payload => {
                 const loginFormContainer = document.getElementById( loginFormId );
@@ -43,7 +43,7 @@
                 button.style.width = "75px"
                 button.name = "register"
                 button.onclick = function () {
-                    mojoauth.enableWebauthn( payload.oauth.access_token,payload.user.identifier )
+                    mojoauth.enableWebauthn( payload.oauth.access_token )
                 }
                 newButton.appendChild( button )
                 rootContainer.appendChild( newButton )
