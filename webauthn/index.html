@@ -2,55 +2,54 @@
 <!DOCTYPE html>
 
 <head>
-    <script src="./mojoauth.min.js"></script>
+    <script src="https://dev-mojoauth-cdn.netlify.app/js/mojoauth.min.js"></script>
 </head>
 
 <body>
     <div style="text-align:center; margin:auto">
         <h2>MojoAuth Webauthn Demo </h2>
-        <div id="mojoauth-passwordless-form"></div>
-
+        <a id="mojoauth-passwordless-form">Register new component</a>
         <script>
             const rootContainer = document.getElementById( "mojoauth-passwordless-form" )
             const postLoginId = 'post-login-message';
             const loginFormId = 'mojoauth-login-container';
 
 
-            const mojoauth = new MojoAuth( "410f7785-14f5-4a89-a0af-0e0f71d4c683" );
+            const mojoauth = new MojoAuth( "a6b50b88-4f6c-4a52-9289-0182c64cf869" );
             // Use signInWithEmailOTP() for authentication using Email OTP
-            mojoauth.signInWithMagicLink().then( payload => {
-                const loginFormContainer = document.getElementById( loginFormId );
-                if ( loginFormContainer ) {
-                    rootContainer.removeChild( loginFormContainer );
-                }
-                const postLoginContainer = document.getElementById( postLoginId );
-                if ( postLoginContainer ) {
-                    rootContainer.removeChild( postLoginContainer );
-                }
-                const finish = document.createElement( "h2" )
-                finish.innerHTML = "You have been logged in Successfully";
-                const data = document.createElement( 'pre' )
-                data.style.margin = "0 100px"
-                data.innerHTML = ( JSON.stringify( payload ) );
-                const finalContainer = document.createElement( "div" )
-                finalContainer.appendChild( finish )
-                finalContainer.appendChild( data )
-                rootContainer.appendChild( finalContainer )
+            mojoauth.signInWithEmailOTP().then( payload => {
+                    const loginFormContainer = document.getElementById( loginFormId );
+                    if ( loginFormContainer ) {
+                        rootContainer.removeChild( loginFormContainer );
+                    }
+                    const postLoginContainer = document.getElementById( postLoginId );
+                    if ( postLoginContainer ) {
+                        rootContainer.removeChild( postLoginContainer );
+                    }
+                    const finish = document.createElement( "h2" )
+                    finish.innerHTML = "You have been logged in Successfully";
+                    const data = document.createElement( 'pre' )
+                    data.style.margin = "0 100px"
+                    data.innerHTML = ( JSON.stringify( payload ) );
+                    const finalContainer = document.createElement( "div" )
+                    finalContainer.appendChild( finish )
+                    finalContainer.appendChild( data )
+                    rootContainer.appendChild( finalContainer )
 
-                const button = document.createElement( 'button' )
-                const newButton = document.createElement( 'div' )
-                button.style.height = "25px"
-                button.style.width = "75px"
-                button.name = "register"
-                button.onclick = function () {
-                    mojoauth.enableWebauthn( payload.oauth.access_token )
-                }
-                newButton.appendChild( button )
-                rootContainer.appendChild( newButton )
+                    const button = document.createElement( 'button' )
+                    const newButton = document.createElement( 'div' )
+                    button.style.height = "25px"
+                    button.style.width = "75px"
+                    button.name = "register"
+                    button.onclick = function () {
+                        mojoauth.enableWebauthn( payload.oauth.access_token,payload.user.identifier )
+                    }
+                    newButton.appendChild( button )
+                    rootContainer.appendChild( newButton )
 
 
 
-            } );
+                } );
 
         </script>
     </div>
