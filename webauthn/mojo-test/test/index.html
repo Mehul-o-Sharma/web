@@ -7,7 +7,12 @@
       <div id="mojoauth-passwordless-form"> </div>
       <script>
          const mojoauth = new MojoAuth("71736bb0-8a9b-4f4d-8503-62355cfb030b")
-         mojoauth.signInWithStateID().then(response => console.log(response))
+         mojoauth.signInWithStateID().then(response => {
+            console.log(response);
+            document.getElementById('token').innerText=response.oauth.access_token
+                                                       })
       </script>
+      <div style="margin:100px auto">Token:</div>
+      <div id='token'></div>
    </body>
 </html>
