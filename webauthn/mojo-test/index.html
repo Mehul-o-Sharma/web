@@ -18,7 +18,7 @@
         config={
             language: "en",
             redirect_url: "mojoauth-demo.netlify.app/test",
-            source: [ {type:'phone',feature:'otp'}, {type:'email',feature:'magiclink'}],
+            source: [ {type:'email',feature:'magiclink'}],
         }
         const mojoauth = new MojoAuth( "c955e698-ed0d-4ee1-81f0-b799213f3842", config);
         // Use signInWithEmailOTP() for authentication using Email OTP
